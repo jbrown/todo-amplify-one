@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 
 import Navbar from "./components/Navbar";
+import TodoList from "./components/TodoList";
 
 Amplify.configure(awsconfig);
 
@@ -13,7 +14,13 @@ function App() {
   return (
     <React.Fragment>
       <Navbar onSignOut={() => Auth.signOut()} />
-      <div className="container">Content here.</div>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <TodoList />
+          </div>
+        </div>
+      </div>
     </React.Fragment>
   );
 }
