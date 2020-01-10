@@ -11,9 +11,10 @@ Amplify.configure(awsconfig);
 
 function App() {
   return (
-    <div className="container">
+    <React.Fragment>
       <Navbar onSignOut={() => Auth.signOut()} />
-    </div>
+      <div className="container">Content here.</div>
+    </React.Fragment>
   );
 }
 
