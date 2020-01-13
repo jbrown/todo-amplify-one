@@ -1,5 +1,6 @@
 import React from "react";
 import useTodos from "../hooks/useTodos";
+import TodoListItem from "./TodoListItem";
 
 const TodoList = () => {
   const todos = useTodos();
@@ -7,9 +8,7 @@ const TodoList = () => {
   return (
     <div>
       {todos.map(todo => (
-        <div key={todo.id} className="border rounded py-1 px-2 mt-1">
-          {todo.name}
-        </div>
+        <TodoListItem key={todo.id} todo={todo} />
       ))}
     </div>
   );
