@@ -11,6 +11,10 @@ function reducer(state, action) {
       return { todos: action.payload };
     case "add":
       return { todos: [action.payload, ...state.todos] };
+    case "remove":
+      return {
+        todos: state.todos.filter(todo => todo.id !== action.payload.id)
+      };
     default:
       return state;
   }
@@ -46,6 +50,33 @@ function useTodos() {
             }
           } = data;
           dispatch({ type: "add", payload: onCreateTodo });
+        }
+      });
+    }
+    subscribeToNewTodos();
+
+    return () => subscriber && subscriber.unsubscribe();
+  }, []);
+
+  // subscribe to recently removed todos
+  useEffect(() => {
+    let subscriber;
+
+    async function subscribeToNewTodos() {
+      let { username } = await Auth.currentAuthenticatedUser({
+        bypassCache: false
+      });
+
+      subscriber = API.graphql(
+        graphqlOperation(subscriptions.onDeleteTodo, { owner: username })
+      ).subscribe({
+        next: data => {
+          const {
+            value: {
+              data: { onDeleteTodo }
+            }
+          } = data;
+          dispatch({ type: "remove", payload: onDeleteTodo });
         }
       });
     }

@@ -21,7 +21,6 @@ const TodoListItem = ({ todo }) => {
             className="dropdown-item"
             href="#"
             onClick={() => {
-              console.log("delete todo");
               API.graphql(
                 graphqlOperation(mutations.deleteTodo, {
                   input: { id: todo.id }
