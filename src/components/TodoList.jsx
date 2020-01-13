@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { API, graphqlOperation } from "aws-amplify";
-import * as queries from "../graphql/queries";
+import React from "react";
+import useTodos from "../hooks/useTodos";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    async function fetchTodos() {
-      const all = await API.graphql(graphqlOperation(queries.listTodos));
-      setTodos(all.data.listTodos.items);
-    }
-    fetchTodos();
-  }, []);
+  const todos = useTodos();
 
   return (
     <div>
