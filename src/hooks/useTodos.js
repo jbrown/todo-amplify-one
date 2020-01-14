@@ -68,7 +68,7 @@ function useTodos() {
   useEffect(() => {
     let subscriber;
 
-    async function subscribeToNewTodos() {
+    async function subscribeToRemovedTodos() {
       let { username } = await Auth.currentAuthenticatedUser({
         bypassCache: false
       });
@@ -86,7 +86,7 @@ function useTodos() {
         }
       });
     }
-    subscribeToNewTodos();
+    subscribeToRemovedTodos();
 
     return () => subscriber && subscriber.unsubscribe();
   }, []);
