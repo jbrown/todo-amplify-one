@@ -5,7 +5,9 @@ import * as mutations from "../graphql/mutations";
 const TodoListItem = ({ todo }) => {
   return (
     <div className="d-flex border rounded py-1 px-2 mt-1">
-      <div className="flex-fill">{todo.name}</div>
+      <div className="flex-fill">
+        {!!todo.completedAt ? <del>{todo.name}</del> : todo.name}
+      </div>
       <div className="btn-group dropleft">
         <button
           type="button"
@@ -29,6 +31,24 @@ const TodoListItem = ({ todo }) => {
             }}
           >
             Delete
+          </a>
+          <a
+            className="dropdown-item"
+            href="#"
+            onClick={() => {
+              API.graphql(
+                graphqlOperation(mutations.updateTodo, {
+                  input: {
+                    id: todo.id,
+                    completedAt: !!todo.completedAt
+                      ? null
+                      : new Date().toISOString()
+                  }
+                })
+              );
+            }}
+          >
+            {!!todo.completedAt ? "Uncomplete" : "Complete"}
           </a>
         </div>
       </div>

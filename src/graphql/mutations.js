@@ -8,6 +8,7 @@ export const createTodo = `mutation CreateTodo(
   createTodo(input: $input, condition: $condition) {
     id
     name
+    completedAt
     owner
   }
 }
@@ -19,6 +20,7 @@ export const updateTodo = `mutation UpdateTodo(
   updateTodo(input: $input, condition: $condition) {
     id
     name
+    completedAt
     owner
   }
 }
@@ -30,6 +32,7 @@ export const deleteTodo = `mutation DeleteTodo(
   deleteTodo(input: $input, condition: $condition) {
     id
     name
+    completedAt
     owner
   }
 }
