@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
+import TodoForm from "./TodoForm";
 
-const TodoListItem = ({ todo }) => {
+const TodoListItemDetails = ({ todo, onEdit }) => {
   return (
-    <div className="d-flex border rounded py-1 px-2 mt-1">
+    <React.Fragment>
       <div className="flex-fill">
         {!!todo.completedAt ? <del>{todo.name}</del> : todo.name}
       </div>
@@ -19,6 +20,9 @@ const TodoListItem = ({ todo }) => {
           Action
         </button>
         <div className="dropdown-menu">
+          <a className="dropdown-item" href="#" onClick={onEdit}>
+            Edit
+          </a>
           <a
             className="dropdown-item"
             href="#"
@@ -52,6 +56,20 @@ const TodoListItem = ({ todo }) => {
           </a>
         </div>
       </div>
+    </React.Fragment>
+  );
+};
+
+const TodoListItem = ({ todo }) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  return (
+    <div className="d-flex border rounded py-1 px-2 mt-1">
+      {isEditing ? (
+        <TodoForm todo={todo} onClose={() => setIsEditing(false)} />
+      ) : (
+        <TodoListItemDetails todo={todo} onEdit={() => setIsEditing(true)} />
+      )}
     </div>
   );
 };
