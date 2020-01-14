@@ -15,6 +15,12 @@ function reducer(state, action) {
       return {
         todos: state.todos.filter(todo => todo.id !== action.payload.id)
       };
+    case "update":
+      return {
+        todos: state.todos.map(todo =>
+          todo.id === action.payload.id ? action.payload : todo
+        )
+      };
     default:
       return state;
   }
@@ -81,6 +87,33 @@ function useTodos() {
       });
     }
     subscribeToNewTodos();
+
+    return () => subscriber && subscriber.unsubscribe();
+  }, []);
+
+  // subscribe to recently updated todos
+  useEffect(() => {
+    let subscriber;
+
+    async function subscribeToUpdatedTodos() {
+      let { username } = await Auth.currentAuthenticatedUser({
+        bypassCache: false
+      });
+
+      subscriber = API.graphql(
+        graphqlOperation(subscriptions.onUpdateTodo, { owner: username })
+      ).subscribe({
+        next: data => {
+          const {
+            value: {
+              data: { onUpdateTodo }
+            }
+          } = data;
+          dispatch({ type: "update", payload: onUpdateTodo });
+        }
+      });
+    }
+    subscribeToUpdatedTodos();
 
     return () => subscriber && subscriber.unsubscribe();
   }, []);
