@@ -26,3 +26,26 @@ export const listTodos = `query ListTodos(
   }
 }
 `;
+export const searchTodos = `query SearchTodos(
+  $filter: SearchableTodoFilterInput
+  $sort: SearchableTodoSortInput
+  $limit: Int
+  $nextToken: String
+) {
+  searchTodos(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      completedAt
+      owner
+    }
+    nextToken
+    total
+  }
+}
+`;

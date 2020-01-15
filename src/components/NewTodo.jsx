@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
 
-const NewTodo = () => {
+const NewTodo = ({ className }) => {
   let [todoInput, setTodoInput] = useState("");
   return (
-    <div className="d-flex border rounded">
+    <div className={className + " d-flex border rounded"}>
       <input
         value={todoInput}
         onChange={e => setTodoInput(e.target.value)}

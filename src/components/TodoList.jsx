@@ -1,10 +1,7 @@
 import React from "react";
-import useTodos from "../hooks/useTodos";
 import TodoListItem from "./TodoListItem";
 
-const TodoList = () => {
-  const todos = useTodos();
-
+const TodoList = ({ todos }) => {
   return (
     <div>
       {todos.map(todo => (
