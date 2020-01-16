@@ -3,9 +3,7 @@ import React from "react";
 const Navbar = ({ onSignOut }) => {
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
-      <a className="navbar-brand" href="#">
-        Todos
-      </a>
+      <span className="navbar-brand mb-0 h1">Todos</span>
       <button
         className="navbar-toggler"
         type="button"
@@ -20,14 +18,12 @@ const Navbar = ({ onSignOut }) => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Home
-            </a>
+            <span className="nav-link">Home</span>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" onClick={() => onSignOut()}>
+            <span className="nav-link" onClick={() => onSignOut()}>
               Logout
-            </a>
+            </span>
           </li>
         </ul>
       </div>

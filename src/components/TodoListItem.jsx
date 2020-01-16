@@ -20,12 +20,11 @@ const TodoListItemDetails = ({ todo, onEdit }) => {
           Action
         </button>
         <div className="dropdown-menu">
-          <a className="dropdown-item" href="#" onClick={onEdit}>
+          <div className="dropdown-item" onClick={onEdit}>
             Edit
-          </a>
-          <a
+          </div>
+          <div
             className="dropdown-item"
-            href="#"
             onClick={() => {
               API.graphql(
                 graphqlOperation(mutations.deleteTodo, {
@@ -35,10 +34,9 @@ const TodoListItemDetails = ({ todo, onEdit }) => {
             }}
           >
             Delete
-          </a>
-          <a
+          </div>
+          <div
             className="dropdown-item"
-            href="#"
             onClick={() => {
               API.graphql(
                 graphqlOperation(mutations.updateTodo, {
@@ -53,7 +51,7 @@ const TodoListItemDetails = ({ todo, onEdit }) => {
             }}
           >
             {!!todo.completedAt ? "Uncomplete" : "Complete"}
-          </a>
+          </div>
         </div>
       </div>
     </React.Fragment>
