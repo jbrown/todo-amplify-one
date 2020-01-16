@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
+import { Link } from "react-router-dom";
 import * as mutations from "../graphql/mutations";
 import TodoForm from "./TodoForm";
 
@@ -7,7 +8,9 @@ const TodoListItemDetails = ({ todo, onEdit }) => {
   return (
     <React.Fragment>
       <div className="flex-fill">
-        {!!todo.completedAt ? <del>{todo.name}</del> : todo.name}
+        <Link to={"/todos/" + todo.id}>
+          {!!todo.completedAt ? <del>{todo.name}</del> : todo.name}
+        </Link>
       </div>
       <div className="btn-group dropleft">
         <button

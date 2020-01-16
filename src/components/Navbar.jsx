@@ -1,6 +1,9 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = ({ onSignOut }) => {
+  const { pathname } = useLocation();
+
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <span className="navbar-brand mb-0 h1">Todos</span>
@@ -17,8 +20,10 @@ const Navbar = ({ onSignOut }) => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
-          <li className="nav-item active">
-            <span className="nav-link">Home</span>
+          <li className={"nav-item" + (pathname === "/" ? " active" : "")}>
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
           </li>
           <li className="nav-item">
             <span className="nav-link" onClick={() => onSignOut()}>
